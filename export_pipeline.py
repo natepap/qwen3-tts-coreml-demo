@@ -1151,11 +1151,11 @@ if __name__ == "__main__":
     captured, gen_kwargs = capture_prefill_inputs(tts, m, text="Hello World")
 
     # # ── Export models ─────────────────────────────────────────────────────────
-    # coreml_prefill  = export_talker_prefill(m, captured)
-    # coreml_decode   = export_talker_decode(m, captured)
-    # coreml_cp       = export_code_predictor(m)
-    # tts32, m32 = load_model(torch.float32) # speech tokenizer requires fp32 loaded model
-    # coreml_st       = export_speech_tokenizer(m32)
+    coreml_prefill  = export_talker_prefill(m, captured)
+    coreml_decode   = export_talker_decode(m, captured)
+    coreml_cp       = export_code_predictor(m)
+    tts32, m32 = load_model(torch.float32) # speech tokenizer requires fp32 loaded model
+    coreml_st       = export_speech_tokenizer(m32)
 
     # # ── Export Swift assets ───────────────────────────────────────────────────
     # export_swift_assets(m)
