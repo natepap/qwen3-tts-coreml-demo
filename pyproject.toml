@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qwen3-tts-coreml"
+version = "0.1.0"
+description = "CoreML conversion pipeline and iOS demo for Qwen3-TTS"
+requires-python = ">=3.12,<3.14"
+license = { text = "Apache-2.0" }
+
+# Core conversion dependencies
+# Note: do NOT downgrade transformers — the model code requires masking_utils,
+# modeling_rope_utils, and can_return_tuple that don't exist in older versions.
+dependencies = [
+  "torch==2.9.0",
+  "torchaudio==2.9.0",
+  "transformers==4.57.3",
+  "coremltools==9.0",
+  "accelerate==1.12.0",
+  "numpy",
+  "librosa",
+  "soundfile",
+  "einops",
+]
+
+# If you hit BlobWriter errors during conversion, fall back to this stack:
+# torch==2.5.1
+# torchaudio==2.5.1
+# coremltools==8.1.0
+# transformers==4.57.3  (keep — don't downgrade)
+
+[tool.setuptools]
+packages = { find = { where = ["."], include = ["coreml_conversion*"] } }
